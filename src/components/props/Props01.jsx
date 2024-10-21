@@ -1,5 +1,4 @@
 import React from 'react'
-
 const Props01 = ({name,address}) => {
   return (
     <div>

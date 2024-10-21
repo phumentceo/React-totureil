@@ -7,5 +7,4 @@ const Props01 = ({name,address}) => {
     </div>
   )
 }
-
 export default Props01

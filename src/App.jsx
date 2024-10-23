@@ -5,6 +5,8 @@ import Props02 from './components/props/Props02'
 import Props03 from './components/props/Props03'
 import Condition1 from './components/condition/Condition1'
 import Condition02 from './components/condition/Condition02'
+import Condition3 from './components/condition/Condition3'
+import Object1 from './components/object/Object1'
 const App = () => {
   return (
     <div>
@@ -22,8 +24,14 @@ const App = () => {
        {/* <Props03 width={"300px"} height={"400px"} bg={"red"}/>
        <Props03 width={"200px"} height={"300px"} bg={"blue"}/> */}
 
+       
        {/* <Condition1/> */}
-       <Condition02/>
+       {/* <Condition02/> */}
+       {/* <Condition3 avg={90} name={"Pot Phument"}/>
+       <Condition3 avg={50} name={"Panha"}/>
+       <Condition3 avg={70} name={"Pov Liya"}/> */}
+
+       <Object1/>
 
     </div> 
   )

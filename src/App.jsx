@@ -7,6 +7,8 @@ import Condition1 from './components/condition/Condition1'
 import Condition02 from './components/condition/Condition02'
 import Condition3 from './components/condition/Condition3'
 import Object1 from './components/object/Object1'
+import Object2 from './components/object/Object2'
+import Object3 from './components/object/Object3'
 const App = () => {
   return (
     <div>
@@ -31,7 +33,10 @@ const App = () => {
        <Condition3 avg={50} name={"Panha"}/>
        <Condition3 avg={70} name={"Pov Liya"}/> */}
 
-       <Object1/>
+       {/* <Object1/> */}
+       {/* <Object2/> */}
+
+       <Object3/>
 
     </div> 
   )

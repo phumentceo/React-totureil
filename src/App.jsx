@@ -9,6 +9,7 @@ import Condition3 from './components/condition/Condition3'
 import Object1 from './components/object/Object1'
 import Object2 from './components/object/Object2'
 import Object3 from './components/object/Object3'
+import Object4 from './components/object/Object4'
 const App = () => {
   return (
     <div>
@@ -35,8 +36,9 @@ const App = () => {
 
        {/* <Object1/> */}
        {/* <Object2/> */}
+       {/* <Object3/> */}
 
-       <Object3/>
+       <Object4/>
 
     </div> 
   )

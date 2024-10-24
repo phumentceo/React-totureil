@@ -3,7 +3,7 @@ import Props04 from '../props/Props04'
 
 const Object4 = () => {
 
-    const students = [
+        const students = [
         {
             "id"   : 1,
             "name" : "Lika",

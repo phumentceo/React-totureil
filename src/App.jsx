@@ -10,6 +10,8 @@ import Object1 from './components/object/Object1'
 import Object2 from './components/object/Object2'
 import Object3 from './components/object/Object3'
 import Object4 from './components/object/Object4'
+import Object5 from './components/object/Object5'
+import Object6 from './components/object/Object6'
 const App = () => {
   return (
     <div>
@@ -37,8 +39,10 @@ const App = () => {
        {/* <Object1/> */}
        {/* <Object2/> */}
        {/* <Object3/> */}
+       {/* <Object4/> */}
+       {/* <Object5/> */}
+       <Object6/>
 
-       <Object4/>
 
     </div> 
   )

@@ -10,9 +10,9 @@ import Object1 from './components/object/Object1'
 import Object2 from './components/object/Object2'
 import Object4 from './components/object/Object4'
 import Object5 from './components/object/Object5'
-import Exercise01 from './components/object/exercise/Exercise01'
 import Event1 from './components/event/Event1'
 import Event2 from './components/event/Event2'
+import Object06 from './components/object/Object06'
 
 const App = () => {
   return (
@@ -32,16 +32,19 @@ const App = () => {
       {/* <Object2/> */}
       {/* <Object4/> */}
       {/* <Object5/> */}
+      <Object06/>
 
 
       {/* <Exercise01/> */}
 
       {/* <Event1/> */}
-      <Event2 message={"Hello React JS"}>
+      {/* <Event2 message={"Hello React JS"}>
             <h1>React Toturail</h1>
             <p>Welcome to React Toturail</p>
             <p>React is Popular Js Library</p>
-      </Event2>
+      </Event2> */}
+
+
 
     </div>
   )

@@ -8,10 +8,16 @@ const Event1 = () => {
      console.log(e.target.value)
    }
 
+   const shoot = (a,b) => {
+      alert(b.type)
+   }
+
   return (
     <div>
-        <button onClick={handleClick}>Click me</button>
-        <input type="text" onInput={handleInput} />
+        <button onClick={handleClick}>Click me</button> <br /><br />
+        <input type="text" onInput={handleInput} /> <br /><br />
+
+        <button onClick={(event) => shoot("Goal",event) }>Take the shoot</button> <br />
     </div>
   )
 }

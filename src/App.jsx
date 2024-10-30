@@ -13,6 +13,8 @@ import Object5 from './components/object/Object5'
 import Event1 from './components/event/Event1'
 import Event2 from './components/event/Event2'
 import Object06 from './components/object/Object06'
+import State02 from './components/state/State02'
+import State03 from './components/state/State03'
 
 const App = () => {
   return (
@@ -32,7 +34,7 @@ const App = () => {
       {/* <Object2/> */}
       {/* <Object4/> */}
       {/* <Object5/> */}
-      <Object06/>
+      {/* <Object06/> */}
 
 
       {/* <Exercise01/> */}
@@ -44,6 +46,8 @@ const App = () => {
             <p>React is Popular Js Library</p>
       </Event2> */}
 
+      {/* <State02/> */}
+      <State03/>
 
 
     </div>

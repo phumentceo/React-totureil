@@ -1,6 +1,6 @@
 import React, { useState } from 'react';  
 
-const Object07 = () => {  
+const Object08 = () => {  
   const [teacher, setTeacher] = useState({  
     name: 'John Doe',  
     age: 45,  
@@ -27,7 +27,8 @@ const Object07 = () => {
           ...prev.contact,  
           [name]: value,  
         },  
-      }));  
+      }));
+
     } else {  
       // Update other top-level fields  
       setTeacher((prev) => ({  
@@ -39,9 +40,7 @@ const Object07 = () => {
 
   const handleSubjectChange = (e) => {  
     const selectedSubject = e.target.value;  
-    // You might want to do something with the selected subject,   
-    // like updating some state or handling it further  
-    // For now, we can just log or alert it  
+    
     console.log('Selected Subject:', selectedSubject);  
   };  
 
@@ -102,4 +101,4 @@ const Object07 = () => {
   );  
 };  
 
-export default Object07;
+export default Object08;

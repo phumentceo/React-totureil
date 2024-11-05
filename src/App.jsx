@@ -18,6 +18,7 @@ import State03 from './components/state/State03'
 import Event3 from './components/event/Event3'
 import Event4 from './components/event/Event4'
 import Object07 from './components/object/Object07'
+import Object08 from './components/object/Object08'
 
 const App = () => {
   return (
@@ -53,7 +54,10 @@ const App = () => {
       {/* <State03/> */}
       {/* <Event3/> */}
       {/* <Event4/> */}
-      <Object07/>
+      {/* <Object07/> */}
+
+      <Object08/>
+
       
 
     </div>

@@ -13,7 +13,6 @@ const Object_state03 = () => {
 
  const handleChage = (e) => {
     
-    // setTeacher((prev) => ({...prev,[e.target.name]:e.target.value}))
 
     if(e.target.name === 'name' || e.target.name == 'gender'){
         setTeacher((prev) => (
@@ -27,7 +26,7 @@ const Object_state03 = () => {
             {
                 ...preve,
                 contact:{
-                   
+                    ...preve.contact,
                     [e.target.name]:e.target.value,
                 }
             }
@@ -40,13 +39,16 @@ const Object_state03 = () => {
 
         <input type="text" name="name" onChange={handleChage} id="" />
         <br /><br />
-        <select onChange={handleChage} name="gender" id="">
+        <select onChange={handleChage} name="gender" placeholder='Enter your gender'>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
         </select>
 
         <br /><br />
-        <input type="email" name="email" onChange={handleChage} id="" />
+        <input type="email" name="email" onChange={handleChage} placeholder='Enter your Email' />
+        <br /><br />
+
+        <input type="text" name="phone" onChange={handleChage} placeholder='Enter your Phone' />
 
         <h1>Teacher Detail</h1>
 

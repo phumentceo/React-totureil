@@ -15,6 +15,7 @@ const State03 = () => {
   }, [slideIndex]);
 
   const handleNext = () => {
+    console.log(slideIndex);
     setSlideIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 

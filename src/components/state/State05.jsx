@@ -12,7 +12,7 @@ const State05 = () => {
   const handleClick = () => {  
     if (name) {  
       setData([...data, name]);  
-      setName(''); // Clear the input after adding  
+      setName('');
     }  
   };  
 

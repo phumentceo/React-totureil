@@ -7,12 +7,14 @@ const State05 = () => {
 
   const handleInput = (e) => {
     setName(e.target.value);
-    console.log(name);
   }
 
   const handleClick = () => {
-    setPersons([...persons,name]);
-    console.log(persons);
+    if(name != ''){
+        setPersons([...persons,name]);
+        setName('');
+    }
+    
   }
 
   return (
@@ -26,14 +28,25 @@ const State05 = () => {
             <button type='button' onClick={handleClick} className=' btn btn-success'>Add+</button>
          </form>
 
+         <div className=' w-50 mx-auto mb-5 mt-5'>
+            <input type="search" name="" className=" form-control" placeholder='Search here.....' />
+         </div>
+
          <div className="show w-50 mx-auto mt-5 border p-5 position-sticky sticky-top">
             <h3>Person List</h3>
             <hr className=' mb-5' />
-            <div className=' d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>
-                <h5>ID : 1</h5>
-                <h5>Name : John Doe</h5>
-                <button className=' btn btn-danger btn-sm '>remove -</button>
-            </div>
+
+            {
+                persons.map((item,index) => (
+                    <div className=' d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>
+                        <h5>ID :   {index+1}</h5>
+                        <h5>Name : {item}</h5>
+                        <button className=' btn btn-danger btn-sm '>remove -</button>
+                    </div>
+                ))
+            }
+            
+
          </div>
     </div>
   )

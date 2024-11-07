@@ -22,6 +22,7 @@ import Object_state02 from './components/hook/object-state/Object_state02'
 import Object_state03 from './components/hook/object-state/Object_state03'
 import Effect01 from './components/hook/effect/Effect01'
 import Object_state04 from './components/hook/object-state/Object_state04'
+import State05 from './components/state/State05'
 const App = () => {
   return (
     <div>
@@ -58,12 +59,13 @@ const App = () => {
        {/* <State01/> */}
        {/* <State02/> */}
        {/* <State03/> */}
-      {/* <State04/> */}
+       {/* <State04/> */}
+       <State05/>
 
       {/* <Object_state01/> */}
       {/* <Object_state02/> */}
       {/* <Object_state03/> */}
-      <Object_state04/>
+      {/* <Object_state04/> */}
 
       {/* <Effect01/> */}
 

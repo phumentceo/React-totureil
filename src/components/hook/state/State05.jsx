@@ -14,7 +14,17 @@ const State05 = () => {
         setPersons([...persons,name]);
         setName('');
     }
-    
+  }
+
+  const handleDelete = (index) => {
+     alert(index);
+
+     //index = 0
+     setPersons(persons.filter((value,key) => key != index));
+
+     /*
+       persons = ["lika","panha","reaksa"];
+     */
   }
 
   return (
@@ -38,10 +48,10 @@ const State05 = () => {
 
             {
                 persons.map((item,index) => (
-                    <div className=' d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>
+                    <div key={index} className=' d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>
                         <h5>ID :   {index+1}</h5>
                         <h5>Name : {item}</h5>
-                        <button className=' btn btn-danger btn-sm '>remove -</button>
+                        <button onClick={() => handleDelete(index)} className=' btn btn-danger btn-sm '>remove -</button>
                     </div>
                 ))
             }

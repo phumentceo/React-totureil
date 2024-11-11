@@ -1,7 +1,7 @@
 import React, { useState } from 'react';  
 
 const State05 = () => {  
-  const [name, setName] = useState(''); 
+  const [name, setName] = useState('');  
   const [searchQuery, setSearchQuery] = useState('');  
   const [data, setData] = useState([]);  
 
@@ -16,21 +16,20 @@ const State05 = () => {
   const handleClick = () => {  
     if (name) {  
       if (editMode) {  
+        // If in edit mode, update the item  
         handleUpdate(itemToEdit);  
       } else {  
-        const newItem = { id: Date.now(), name };
-        setData([...data, newItem]);  
+        // Else, create a new item  
+        setData([...data, name]);  
       }  
-
-      console.log(data);
       setName('');  
       setEditMode(false);  
       setItemToEdit(null);  
     }  
   };  
 
-  const handleDelete = (itemId) => {  
-    setData(data.filter(item => item.id !== itemId));  
+  const handleDelete = (itemToDelete) => {  
+    setData(data.filter(item => item !== itemToDelete));  
   };  
 
   const handleSearch = (e) => {  
@@ -38,22 +37,22 @@ const State05 = () => {
   };  
 
   const filteredData = data.filter(item =>  
-    item.name.toLowerCase().replace(/\s+/g, '').includes(searchQuery.replace(/\s+/g, ''))  
+    item.toLowerCase().replace(/\s+/g, '').includes(searchQuery.replace(/\s+/g, ''))  
   );  
 
   // Edit  
   const handleEdit = (item) => {  
-    setName(item.name);  
-    setEditMode(true); 
-    setItemToEdit(item.id);  
+    setName(item); // populate the input with the item to be edited  
+    setEditMode(true); // set edit mode to true  
+    setItemToEdit(item); // set the current item being edited  
   };  
 
   // Update  
-  const handleUpdate = (itemToUpdateId) => {  
-    setData(data.map(item => (item.id === itemToUpdateId ? { ...item, name } : item)));  
+  const handleUpdate = (itemToUpdate) => {  
+    setData(data.map(item => (item === itemToUpdate ? name : item)));  
     setName('');  
     setEditMode(false);  
-    setItemToEdit(null);
+    setItemToEdit(null); // clear the item to edit  
   };  
 
   return (  
@@ -85,12 +84,12 @@ const State05 = () => {
         <div>  
           <h1>Show User</h1>  
         </div>  
-        {filteredData.map((item) => (  
-          <div key={item.id} className='d-flex justify-content-between align-items-center my-3 p-3 border-bottom'>  
-            <h6>{item.name}</h6>  
+        {filteredData.map((item, index) => (  
+          <div key={index} className='d-flex justify-content-between align-items-center my-3 p-3 border-bottom'>  
+            <h6>{item}</h6>  
             <div>  
               <button className='btn btn-info ms-2' onClick={() => handleEdit(item)}>Edit</button>  
-              <button className='btn btn-danger ms-2' onClick={() => handleDelete(item.id)}>Delete</button>  
+              <button className='btn btn-danger ms-2' onClick={() => handleDelete(item)}>Delete</button>  
             </div>  
           </div>  
         ))}  

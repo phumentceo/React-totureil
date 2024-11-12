@@ -5,7 +5,6 @@ const State05 = () => {
   const [name,setName] = useState('');
   const [persons, setPersons] = useState([]);
   const [edit,editMod] = useState(false);
-
   const [personId,setPersonId] = useState(null);
 
   const handleInput = (e) => {
@@ -13,9 +12,10 @@ const State05 = () => {
   }
 
   const handleSave = () => {
+    
     if(name != ''){
         setPersons([...persons,name]);
-        setName('');
+        setName(''); 
     }
   }
 
@@ -30,10 +30,10 @@ const State05 = () => {
   const handleEdit = (index,item) => {
     editMod(true)
     setName(item)
-    setPersonId((value) => value + index)
-
-    console.log(personId);
+    setPersonId(index)
   }
+
+
 
   const handleCancel = () => {
     editMod(false)

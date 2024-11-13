@@ -34,13 +34,14 @@ const State05 = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-       
       }
+
       reader.readAsDataURL(file);  
-      // D://image/sdafasfdsaa/phone.jpg
+
     }
-   
   }
+  
+  
 
   const handleDelete = (id) => {
     if(confirm("Do you want to delete this?")){
@@ -102,7 +103,7 @@ const State05 = () => {
                 <input onChange={handleImageChange} type="file" name="" className=" form-control shadow-none" placeholder='Choose your profile' />
             </div>
 
-            <div>
+            <div className=' my-3'>
               {image && <img src={image} alt="Uploaded" className="mt-2" width="100" /> }
             </div>
             

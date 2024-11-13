@@ -21,6 +21,7 @@ import Object07 from './components/object/Object07'
 import Object08 from './components/object/Object08'
 import State05 from './components/state/State05'
 import State06 from './components/state/State06'
+import TodoList from './components/state/TodoList'
 
 const App = () => {
   return (
@@ -55,7 +56,8 @@ const App = () => {
       {/* <State02/> */}
       {/* <State03/> */}
       {/* <State05/> */}
-      <State06/>
+      {/* <State06/> */}
+      <TodoList/>
     
 
       {/* <Event3/> */}

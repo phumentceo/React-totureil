@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const State05 = () => {
 
@@ -7,7 +7,7 @@ const State05 = () => {
   const [edit,editMod] = useState(false);
   const [personId,setPersonId] = useState(null);
   const [search,setSearch] = useState('');
-
+  const [showPerson,setShowPerson] = useState();
   
 
   const handleInput = (e) => {
@@ -45,15 +45,6 @@ const State05 = () => {
   //hadle update
   const handleUpdate = (id) => {
         setPersons(persons.map((value,pId) => id === pId ? name : value ))
-
-        //person = [A,b,c];
-
-        //setPersons("A")  => person = [A,b,c];
-
-        //setPerson("b")   => person = [A,b,c];
-
-        //serPerson(name='Bro c')  => person = [A,b,Bro c];
-
         setName('')
         editMod(false);
         setPersonId(null);
@@ -71,9 +62,19 @@ const State05 = () => {
     setSearch(e.target.value.toLowerCase());
   }
 
-  const filterPersons = persons.filter(value => (
-    value.toLowerCase().replace(/\s+/g, '').includes(search.replace(/\s+/g, ''))
-  ));
+  useEffect(() => {
+    if(search != ''){
+      setShowPerson(persons.filter(PersonName => {
+        return PersonName.toLowerCase().replace(/\s+/g, '').includes(search.replace(/\s+/g, ''))
+      }));
+    }else{
+      setShowPerson(persons);
+    }
+  },[search,persons]);
+
+  // const filterPersons = persons.filter(value => (
+  //   value.toLowerCase().replace(/\s+/g, '').includes(search.replace(/\s+/g, ''))
+  // ));
 
   return (
     <div>
@@ -99,7 +100,7 @@ const State05 = () => {
             <hr className=' mb-5' />
 
             {
-                filterPersons.map((item,key) => (
+                (search != '') ? showPerson.map((item,key) => (
                     <div key={key} className=' d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>
                         <h5>ID :   {key+1}</h5>
                         <h5>Name : {item}</h5>
@@ -111,6 +112,7 @@ const State05 = () => {
                         
                     </div>
                 ))
+                : <h4>No Person Found.</h4>
             }
             
 

@@ -1,61 +1,57 @@
-import React, { useState, useEffect } from 'react';  
+import React, { useEffect, useState } from 'react';  
 
 const TodoList = () => {  
-  const [task, setTask] = useState(''); // State for the new task input.  
-  const [tasks, setTasks] = useState([]); // State for the list of tasks.  
 
-  // Load tasks from localStorage when the component mounts.  
+
+  const [todos, setTodos] = useState(() => {  
+    const savedTodos  = localStorage.getItem('todos');  
+    return savedTodos ? JSON.parse(savedTodos) : []; 
+  });
+
+
+  const [inputValue, setInputValue] = useState('');  
+
   useEffect(() => {  
-    const storedTasks = localStorage.getItem('tasks'); // Get stored tasks.  
-    if (storedTasks) {  
-      setTasks(JSON.parse(storedTasks)); // Parse and set tasks if they exist.  
-    }  
-  }, []);  
+    localStorage.setItem('todos', JSON.stringify(todos));  
+  }, [todos]);  
 
-  // Save tasks to localStorage whenever tasks state changes.  
-  useEffect(() => {  
-    localStorage.setItem('tasks', JSON.stringify(tasks)); // Convert tasks to JSON and save.  
-  }, [tasks]);  
-
-  // Handle input changes in the task input.  
-  const handleInputChange = (event) => {  
-    setTask(event.target.value); // Update task state with input value.  
-  };  
-
-  // Add a new task to the list.  
-  const handleAddTask = () => {  
-    if (task.trim() !== '') { // Check for non-empty input.  
-      setTasks((prevTasks) => [...prevTasks, task]); // Add new task to list.  
-      setTask(''); // Clear the input after adding.  
+  const handleAddTodo = () => {  
+    if (inputValue.trim() !== '') {  
+      setTodos([...todos, { text: inputValue, completed: false }]);  
+      setInputValue('');  
     }  
   };  
 
-  // Delete a task based on index.  
-  const handleDeleteTask = (index) => {  
-    if (window.confirm('Do you want to delete this task?')) {  
-      const updatedTasks = tasks.filter((_, i) => i !== index); // Filter out the task to delete.  
-      setTasks(updatedTasks); // Update the task list.  
-    }  
+  const handleToggleTodo = (index) => {  
+    const updatedTodos = todos.map((todo, i) => {  
+      if (i === index) {  
+        return { ...todo, completed: !todo.completed };  
+      }  
+      return todo;  
+    });  
+    setTodos(updatedTodos);  
+  };  
+
+  const handleDeleteTodo = (index) => {  
+    const updatedTodos = todos.filter((_, i) => i !== index);  
+    setTodos(updatedTodos);  
   };  
 
   return (  
-    <div style={{ margin: '20px' }}>  
-      <h1>ToDo List</h1>  
-      <div>  
-        <input  
-          type="text"  
-          value={task}  
-          onChange={handleInputChange} // Update state on input change.  
-          placeholder="Enter your task"  
-          style={{ marginRight: '10px' }}  
-        />  
-        <button onClick={handleAddTask}>Add Task</button>  
-      </div>  
-      <ul style={{ padding: '0' }}>  
-        {tasks.map((t, index) => (  
-          <li key={index} style={{ listStyleType: 'none', margin: '5px 0' }}>  
-            {t}  
-            <button onClick={() => handleDeleteTask(index)} style={{ marginLeft: '10px' }}>Delete</button>  
+    <div>  
+      <h1>To-Do List</h1>  
+      <input   
+        type="text"   
+        value={inputValue}   
+        onChange={(e) => setInputValue(e.target.value)}   
+        placeholder="Add a new task"  
+      />  
+      <button onClick={handleAddTodo}>Add</button>  
+      <ul>  
+        {todos.map((todo, index) => (  
+          <li key={index} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>  
+            <span onClick={() => handleToggleTodo(index)}>{todo.text}</span>  
+            <button onClick={() => handleDeleteTodo(index)}>Delete</button>  
           </li>  
         ))}  
       </ul>  

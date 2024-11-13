@@ -6,39 +6,74 @@ const State05 = () => {
   const [persons, setPersons] = useState([]);
   const [edit,editMod] = useState(false);
   const [personId,setPersonId] = useState(null);
+  const [search,setSearch] = useState('');
+
+  
 
   const handleInput = (e) => {
     setName(e.target.value);
   }
 
   const handleSave = () => {
-    
+
     if(name != ''){
-        setPersons([...persons,name]);
+
+        if(edit){
+           handleUpdate(personId)
+        }else{
+          setPersons([...persons,name]);
+        }
         setName(''); 
     }
   }
 
-  const handleDelete = (index) => {
+  const handleDelete = (id) => {
     if(confirm("Do you want to delete this?")){
-      setPersons(persons.filter((value,key) => key != index));
+      setPersons(persons.filter((value,key) => key != id));
     }
   }
 
 
   //Edit
-  const handleEdit = (index,item) => {
+  const handleEdit = (id,item) => {
     editMod(true)
     setName(item)
-    setPersonId(index)
+    setPersonId(id)
   }
 
 
+  //hadle update
+  const handleUpdate = (id) => {
+        setPersons(persons.map((value,pId) => id === pId ? name : value ))
+
+        //person = [A,b,c];
+
+        //setPersons("A")  => person = [A,b,c];
+
+        //setPerson("b")   => person = [A,b,c];
+
+        //serPerson(name='Bro c')  => person = [A,b,Bro c];
+
+        setName('')
+        editMod(false);
+        setPersonId(null);
+
+  }
+
+ 
 
   const handleCancel = () => {
     editMod(false)
     setName('')
   }
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value.toLowerCase());
+  }
+
+  const filterPersons = persons.filter(value => (
+    value.toLowerCase().replace(/\s+/g, '').includes(search.replace(/\s+/g, ''))
+  ));
 
   return (
     <div>
@@ -56,7 +91,7 @@ const State05 = () => {
          </form>
 
          <div className=' w-50 mx-auto mb-5 mt-5'>
-            <input type="search" name="" className=" form-control" placeholder='Search here.....' />
+            <input type="search" onInput={handleSearch} className=" form-control" placeholder='Search here.....' />
          </div>
 
          <div className="show w-50 mx-auto mt-5 border p-5 position-sticky sticky-top">
@@ -64,14 +99,14 @@ const State05 = () => {
             <hr className=' mb-5' />
 
             {
-                persons.map((item,index) => (
-                    <div key={index} className=' d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>
-                        <h5>ID :   {index+1}</h5>
+                filterPersons.map((item,key) => (
+                    <div key={key} className=' d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>
+                        <h5>ID :   {key+1}</h5>
                         <h5>Name : {item}</h5>
 
                         <div className="">
-                            <button onClick={() => handleEdit(index,item)} className=' btn btn-primary btn-sm mx-2'>Edit+</button>
-                            <button onClick={() => handleDelete(index)} className=' btn btn-danger btn-sm '>remove -</button>
+                            <button onClick={() => handleEdit(key,item)} className=' btn btn-primary btn-sm mx-2'>Edit+</button>
+                            <button onClick={() => handleDelete(key)} className=' btn btn-danger btn-sm '>remove -</button>
                         </div>
                         
                     </div>

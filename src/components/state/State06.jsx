@@ -1,101 +1,140 @@
-import React, { useState } from 'react';  
+import React, { useState, useEffect } from 'react';  
 
-const State05 = () => {  
+const State06 = () => {  
   const [name, setName] = useState('');  
-  const [searchQuery, setSearchQuery] = useState('');  
-  const [data, setData] = useState([]);  
-
-  // state for edit and create statement  
-  const [editMode, setEditMode] = useState(false);  
-  const [itemToEdit, setItemToEdit] = useState(null); // to hold the item being edited  
+  const [persons, setPersons] = useState([]);  
+  const [edit, editMod] = useState(false);  
+  const [personId, setPersonId] = useState(null);  
+  const [search, setSearch] = useState('');  
+  const [show, setShow] = useState([]);  
+  const [image, setImage] = useState(null); // State for the selected image  
 
   const handleInput = (e) => {  
     setName(e.target.value);  
   };  
 
-  const handleClick = () => {  
-    if (name) {  
-      if (editMode) {  
-        // If in edit mode, update the item  
-        handleUpdate(itemToEdit);  
-      } else {  
-        // Else, create a new item  
-        setData([...data, name]);  
-      }  
-      setName('');  
-      setEditMode(false);  
-      setItemToEdit(null);  
+  const handleImageChange = (e) => {  
+    const file = e.target.files[0];  
+    if (file) {  
+      const reader = new FileReader();  
+      reader.onloadend = () => {  
+        setImage(reader.result); // Store the image URL  
+      };  
+      reader.readAsDataURL(file); // Read the file as a data URL  
     }  
   };  
 
-  const handleDelete = (itemToDelete) => {  
-    setData(data.filter(item => item !== itemToDelete));  
+  const handleSave = () => {  
+    if (name !== '') {  
+      if (edit) {  
+        handleUpdate(personId);  
+      } else {  
+        setPersons([...persons, { name, image }]); // Store image with the name  
+      }  
+      setName('');  
+      setImage(null); // Clear the image after saving  
+    }  
+  };  
+
+  const handleDelete = (id) => {  
+    if (confirm("Do you want to delete this?")) {  
+      setPersons(persons.filter((_, key) => key !== id));  
+    }  
+  };  
+
+  const handleEdit = (id, item) => {  
+    editMod(true);  
+    setName(item.name);  
+    setPersonId(id);  
+    setImage(item.image); // Set the current image for editing  
+  };  
+
+  const handleUpdate = (id) => {  
+    setPersons(persons.map((value, pId) => id === pId ? { name, image } : value));  
+    setName('');  
+    setImage(null); // Clear the image after updating  
+    editMod(false);  
+    setPersonId(null);  
+  };  
+
+  const handleCancel = () => {  
+    editMod(false);  
+    setName('');  
+    setImage(null); // Clear the image on cancel  
   };  
 
   const handleSearch = (e) => {  
-    setSearchQuery(e.target.value.toLowerCase());  
+    setSearch(e.target.value.toLowerCase());  
   };  
 
-  const filteredData = data.filter(item =>  
-    item.toLowerCase().replace(/\s+/g, '').includes(searchQuery.replace(/\s+/g, ''))  
-  );  
-
-  // Edit  
-  const handleEdit = (item) => {  
-    setName(item); // populate the input with the item to be edited  
-    setEditMode(true); // set edit mode to true  
-    setItemToEdit(item); // set the current item being edited  
-  };  
-
-  // Update  
-  const handleUpdate = (itemToUpdate) => {  
-    setData(data.map(item => (item === itemToUpdate ? name : item)));  
-    setName('');  
-    setEditMode(false);  
-    setItemToEdit(null); // clear the item to edit  
-  };  
+  useEffect(() => {  
+    if (search) {  
+      setShow(persons.filter(value =>  
+        value.name.toLowerCase().includes(search)  
+      ));  
+    } else {  
+      setShow(persons);  
+    }  
+  }, [search, persons]);  
 
   return (  
-    <div className='w-50 mx-auto'>  
-      <div>  
-        <input  
-          type="text"  
-          value={name}  
-          onChange={handleInput}  
-          placeholder='Enter name'  
-          className='form-control mb-3'  
-        />  
-        <button className='btn btn-primary mb-5' onClick={handleClick}>  
-          {editMode ? 'Update' : 'Create'}  
-        </button>  
-      </div>  
-
-      <div>  
-        <input  
-          type="text"  
-          value={searchQuery}  
-          onChange={handleSearch}  
-          placeholder='Search by name'  
-          className='form-control mb-3'  
-        />  
-      </div>  
-
-      <div>  
-        <div>  
-          <h1>Show User</h1>  
+    <div>  
+      <form className='w-50 mx-auto p-5 border rounded-3'>  
+        <div className="form-group mb-3">  
+          <label htmlFor="">Username</label>  
+          <input  
+            value={name}  
+            type="text"  
+            onInput={handleInput}  
+            className="form-control shadow-none"  
+            placeholder='Enter person name'  
+          />  
         </div>  
-        {filteredData.map((item, index) => (  
-          <div key={index} className='d-flex justify-content-between align-items-center my-3 p-3 border-bottom'>  
-            <h6>{item}</h6>  
+        <div className="form-group mb-3">  
+          <label htmlFor="">Upload Image</label>  
+          <input  
+            type="file"  
+            accept="image/*"  
+            onChange={handleImageChange}  
+            className="form-control shadow-none"  
+          />  
+          {image && <img src={image} alt="Uploaded" className="mt-2" width="100" />} {/* Display selected image */}  
+        </div>  
+
+        <button type='button' onClick={handleSave} className='btn btn-success'>  
+          {edit ? 'Update' : 'Add+'}  
+        </button>  
+
+        <button onClick={handleCancel} className='btn btn-danger ms-3' type='reset'>Cancel</button>  
+      </form>  
+
+      <div className='w-50 mx-auto mb-5 mt-5'>  
+        <input  
+          type="search"  
+          onInput={handleSearch}  
+          className="form-control"  
+          placeholder='Search here.....'  
+        />  
+      </div>  
+
+      <div className="show w-50 mx-auto mt-5 border p-5 position-sticky sticky-top">  
+        <h3>Person List</h3>  
+        <hr className='mb-5' />  
+
+        {(show.length > 0) ? show.map((item, key) => (  
+          <div key={key} className='d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>  
+            <h5>ID : {key + 1}</h5>  
+            <h5>Name : {item.name}</h5>  
+            {item.image && <img src={item.image} alt="Person" className="mx-2" width="50" />} {/* Show uploaded image */}  
             <div>  
-              <button className='btn btn-info ms-2' onClick={() => handleEdit(item)}>Edit</button>  
-              <button className='btn btn-danger ms-2' onClick={() => handleDelete(item)}>Delete</button>  
+              <button onClick={() => handleEdit(key, item)} className='btn btn-primary btn-sm mx-2'>Edit+</button>  
+              <button onClick={() => handleDelete(key)} className='btn btn-danger btn-sm'>remove -</button>  
             </div>  
           </div>  
-        ))}  
+        )) : <p>No persons found.</p>}  
       </div>  
     </div>  
   );  
 };  
 
-export default State05;
+export default State06;

@@ -7,7 +7,7 @@ const State06 = () => {
   const [personId, setPersonId] = useState(null);  
   const [search, setSearch] = useState('');  
   const [show, setShow] = useState([]);  
-  const [image, setImage] = useState(null); // State for the selected image  
+  const [image, setImage] = useState(null); 
 
   const handleInput = (e) => {  
     setName(e.target.value);  
@@ -18,9 +18,9 @@ const State06 = () => {
     if (file) {  
       const reader = new FileReader();  
       reader.onloadend = () => {  
-        setImage(reader.result); // Store the image URL  
+        setImage(reader.result); 
       };  
-      reader.readAsDataURL(file); // Read the file as a data URL  
+      reader.readAsDataURL(file);
     }  
   };  
 
@@ -29,10 +29,10 @@ const State06 = () => {
       if (edit) {  
         handleUpdate(personId);  
       } else {  
-        setPersons([...persons, { name, image }]); // Store image with the name  
+        setPersons([...persons, { name, image }]); 
       }  
       setName('');  
-      setImage(null); // Clear the image after saving  
+      setImage(null);
     }  
   };  
 

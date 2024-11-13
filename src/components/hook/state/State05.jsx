@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 const State05 = () => {
 
   const [name,setName] = useState('');
+  const [image,setImage] = useState('');
   const [persons, setPersons] = useState([]);
   const [edit,editMod] = useState(false);
   const [personId,setPersonId] = useState(null);
@@ -21,10 +22,24 @@ const State05 = () => {
         if(edit){
            handleUpdate(personId)
         }else{
-          setPersons([...persons,name]);
+          setPersons([...persons,{name,image}]);
         }
         setName(''); 
     }
+  }
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+       
+      }
+      reader.readAsDataURL(file);  
+      // D://image/sdafasfdsaa/phone.jpg
+    }
+   
   }
 
   const handleDelete = (id) => {
@@ -55,6 +70,7 @@ const State05 = () => {
   const handleCancel = () => {
     editMod(false)
     setName('')
+    setImage('');
   }
 
   //Search
@@ -81,6 +97,15 @@ const State05 = () => {
                 <input value={name} type="text" name="" onInput={handleInput} className=" form-control shadow-none" placeholder='Enter person name' />
             </div>
 
+            <div className="form-group mb-3">
+                <label htmlFor="">Profile</label>
+                <input onChange={handleImageChange} type="file" name="" className=" form-control shadow-none" placeholder='Choose your profile' />
+            </div>
+
+            <div>
+              {image && <img src={image} alt="Uploaded" className="mt-2" width="100" /> }
+            </div>
+            
             <button type='button' onClick={handleSave} className=' btn btn-success'>
               { edit == true ? 'Update' : 'Add+'}
             </button>

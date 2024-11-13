@@ -7,7 +7,7 @@ const State05 = () => {
   const [edit,editMod] = useState(false);
   const [personId,setPersonId] = useState(null);
   const [search,setSearch] = useState('');
-  const [showPerson,setShowPerson] = useState();
+  const [showPerson,setShowPerson] = useState([]);
   
 
   const handleInput = (e) => {
@@ -42,7 +42,7 @@ const State05 = () => {
   }
 
 
-  //hadle update
+  //Update
   const handleUpdate = (id) => {
         setPersons(persons.map((value,pId) => id === pId ? name : value ))
         setName('')
@@ -51,17 +51,18 @@ const State05 = () => {
 
   }
 
- 
-
+  //Cancel
   const handleCancel = () => {
     editMod(false)
     setName('')
   }
 
+  //Search
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
   }
 
+  //Search with effect
   useEffect(() => {
     if(search != ''){
       setShowPerson(persons.filter(PersonName => {
@@ -71,10 +72,6 @@ const State05 = () => {
       setShowPerson(persons);
     }
   },[search,persons]);
-
-  // const filterPersons = persons.filter(value => (
-  //   value.toLowerCase().replace(/\s+/g, '').includes(search.replace(/\s+/g, ''))
-  // ));
 
   return (
     <div>
@@ -100,7 +97,7 @@ const State05 = () => {
             <hr className=' mb-5' />
 
             {
-                (search != '') ? showPerson.map((item,key) => (
+                (showPerson.length != 0) ? showPerson.map((item,key) => (
                     <div key={key} className=' d-flex justify-content-between align-items-center mb-2 border-bottom pb-3'>
                         <h5>ID :   {key+1}</h5>
                         <h5>Name : {item}</h5>

@@ -23,6 +23,8 @@ import Object_state03 from './components/hook/object-state/Object_state03'
 import Effect01 from './components/hook/effect/Effect01'
 import Object_state04 from './components/hook/object-state/Object_state04'
 import State05 from './components/hook/state/State05'
+import State06 from './components/hook/state/State06'
+import State07 from './components/hook/state/State07'
 const App = () => {
   return (
     <div>
@@ -60,7 +62,10 @@ const App = () => {
        {/* <State02/> */}
        {/* <State03/> */}
        {/* <State04/> */}
-       <State05/>
+       {/* <State05/> */}
+       {/* <State06/> */}
+       <State07/>
+
 
       {/* <Object_state01/> */}
       {/* <Object_state02/> */}

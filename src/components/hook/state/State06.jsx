@@ -1,4 +1,4 @@
-import React, { useState } from 'react';  
+import React from 'react';  
 
 const State06 = () => {  
   return (  
@@ -45,15 +45,15 @@ const State06 = () => {
                   <td>Male</td>  
                   <td>0978759989</td>  
                   <td>  
-                    <button className='btn btn-primary btn-sm mx-2' onClick={() => handleEdit(item)}>Edit</button>  
-                    <button className='btn btn-danger btn-sm' onClick={() => handleDelete(item.id)}>Delete</button>  
+                    <button className='btn btn-primary btn-sm mx-2'>Edit</button>  
+                    <button className='btn btn-danger btn-sm'>Delete</button>  
                   </td>  
                 </tr>  
              
             </tbody>  
          </table>  
       </div>  
-      
+
     </div>  
   );  
 };  

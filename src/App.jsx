@@ -21,7 +21,7 @@ import Object07 from './components/object/Object07'
 import Object08 from './components/object/Object08'
 import State05 from './components/state/State05'
 import State06 from './components/state/State06'
-import TodoList from './components/state/TodoList'
+import StateStorage from './components/test/StateStorage'
 
 const App = () => {
   return (
@@ -57,7 +57,7 @@ const App = () => {
       {/* <State03/> */}
       {/* <State05/> */}
       {/* <State06/> */}
-      <TodoList/>
+      {/* <TodoList/> */}
     
 
       {/* <Event3/> */}
@@ -65,6 +65,8 @@ const App = () => {
       {/* <Object07/> */}
       {/* <Object08/> */}
 
+
+      <StateStorage/>
       
 
     </div>

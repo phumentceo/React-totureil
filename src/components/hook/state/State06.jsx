@@ -1,32 +1,39 @@
-import React, { useState } from 'react';  
+import React, { useEffect, useState } from 'react';  
 
 const State06 = () => {  
+
   const [persons,setPersons]  = useState(() => {
-    return JSON.parse(localStorage.getItem('persons')) || [];
+    return JSON.parse(localStorage.getItem('personStore')) || [];
   });
+
+
+  //Effec for insert to localStare 
+  useEffect(()=> {
+    localStorage.setItem('personStore',JSON.stringify(persons));
+  },[persons])
+
+
+  //Effect for select person for localStorage (single select)
+  useEffect(() => {
+    const storedPersons = JSON.parse(localStorage.getItem('personStore')) || [];
+    setPersons(storedPersons);
+  },[]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
     let personData = new FormData(e.target);
 
-    // let name = personData.get('username');
-    // let gedner = personData.get('gender');
-    // let phone = personData.get('phone');
-
-    let person = {
+    let personObj = {
       'id' : Date.now(),
       'username' : personData.get('username'),
       'gender'   : personData.get('gender'),
       'phone'    : personData.get('phone')
     }
-    console.log(person);
-
-    setPersons([...persons,person]);
-    localStorage.setItem('persons',JSON.stringify(persons));
-    
-
+    console.log(personObj);
+    setPersons([...persons,personObj]);
   }
+
   return (  
     <div className='w-50 container'>  
 
@@ -65,17 +72,23 @@ const State06 = () => {
               </tr>  
             </thead>  
             <tbody className=' text-center align-middle'>  
+
+                {
+                  persons.map((item,key)=> (
+                    <tr key={key}>  
+                      <td>U-{ item.id }</td>  
+                      <td>{item.username}</td>  
+                      <td>{item.gender}</td>  
+                      <td>{item.phone}</td>  
+                      <td>  
+                        <button className='btn btn-primary btn-sm mx-2'>Edit</button>  
+                        <button className='btn btn-danger btn-sm'>Delete</button>  
+                      </td>  
+                    </tr>  
+                  ))
+                }
              
-                <tr>  
-                  <td>U-1001</td>  
-                  <td>Phument007</td>  
-                  <td>Male</td>  
-                  <td>0978759989</td>  
-                  <td>  
-                    <button className='btn btn-primary btn-sm mx-2'>Edit</button>  
-                    <button className='btn btn-danger btn-sm'>Delete</button>  
-                  </td>  
-                </tr>  
+                
              
             </tbody>  
          </table>  

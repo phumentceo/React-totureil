@@ -10,16 +10,17 @@ const State06 = () => {
   //Effec for insert to localStare 
   useEffect(()=> {
     localStorage.setItem('personStore',JSON.stringify(persons));
-  },[persons])
+  },[persons]);
 
 
-  //Effect for select person for localStorage (single select)
+  //Effect for select person for localStorage
   useEffect(() => {
     const storedPersons = JSON.parse(localStorage.getItem('personStore')) || [];
     setPersons(storedPersons);
   },[]);
 
 
+  //Handle Save 
   const handleSubmit = (e) => {
     e.preventDefault();
     let personData = new FormData(e.target);
@@ -31,7 +32,18 @@ const State06 = () => {
       'phone'    : personData.get('phone')
     }
     console.log(personObj);
+    //Save to state
     setPersons([...persons,personObj]);
+    // localStorage.setItem('personStore',JSON.stringify(persons));
+  }
+
+  //Handle Delete 
+  const handleDelete = (id) => {
+       if(confirm("Do you want to delete this?")){
+           let personFilter = persons.filter(item => item.id != id);
+           setPersons(personFilter);
+          //  localStorage.setItem('personStore',JSON.stringify(persons));
+       }
   }
 
   return (  
@@ -82,7 +94,7 @@ const State06 = () => {
                       <td>{item.phone}</td>  
                       <td>  
                         <button className='btn btn-primary btn-sm mx-2'>Edit</button>  
-                        <button className='btn btn-danger btn-sm'>Delete</button>  
+                        <button onClick={() => handleDelete(item.id)} className='btn btn-danger btn-sm'>Delete</button>  
                       </td>  
                     </tr>  
                   ))

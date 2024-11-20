@@ -22,6 +22,8 @@ import Object08 from './components/object/Object08'
 import State05 from './components/state/State05'
 import State06 from './components/state/State06'
 import StateStorage from './components/test/StateStorage'
+import Context01 from './components/context/context-1/Context01'
+
 
 const App = () => {
   return (
@@ -66,7 +68,9 @@ const App = () => {
       {/* <Object08/> */}
 
 
-      <StateStorage/>
+      {/* <StateStorage/> */}
+
+      <Context01/>
       
 
     </div>

@@ -23,6 +23,7 @@ import State05 from './components/state/State05'
 import State06 from './components/state/State06'
 import StateStorage from './components/test/StateStorage'
 import Context01 from './components/context/context-1/Context01'
+import Context02 from './components/context/context-2/Context02'
 
 
 const App = () => {
@@ -70,7 +71,8 @@ const App = () => {
 
       {/* <StateStorage/> */}
 
-      <Context01/>
+      {/* <Context01/> */}
+      <Context02/>
       
 
     </div>

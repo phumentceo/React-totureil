@@ -26,6 +26,7 @@ import Context01 from './components/context/context-1/Context01'
 import Context02 from './components/context/context-2/Context02'
 import FeedbackForm from './components/promies/Promies'
 import Demo from './components/context/context-0/Demo'
+import Main from './components/context/context-test/Main'
 
 
 const App = () => {
@@ -78,7 +79,11 @@ const App = () => {
 
 
 
-      <Demo/>
+      {/* <Demo/> */}
+
+
+      <Main/>
+
       {/* <Context01/> */}
       {/* <Context02/> */}
       

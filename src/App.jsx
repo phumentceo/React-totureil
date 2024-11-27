@@ -27,6 +27,7 @@ import Context02 from './components/context/context-2/Context02'
 import FeedbackForm from './components/promies/Promies'
 import Demo from './components/context/context-0/Demo'
 import Main from './components/context/context-test/Main'
+import MainComponent from './components/context/context-test/context-build/MainComponent'
 
 
 const App = () => {
@@ -82,7 +83,8 @@ const App = () => {
       {/* <Demo/> */}
 
 
-      <Main/>
+      {/* <Main/> */}
+      <MainComponent/>
 
       {/* <Context01/> */}
       {/* <Context02/> */}

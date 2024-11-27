@@ -6,7 +6,7 @@ const MainComponent = () => {
   return (
     <div>
       {/* Providing the correct value */}
-      <MainContext.Provider value={{ color: 'blue' }}>
+      <MainContext.Provider value={{ color: 'red',message : "fuck you" }}>
         <Component1 />
       </MainContext.Provider>
     </div>

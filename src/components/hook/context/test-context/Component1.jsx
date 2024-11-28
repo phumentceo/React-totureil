@@ -1,12 +1,16 @@
-import React from 'react'
-import Component2 from './Component2'
+import React, { useContext } from 'react'
+import Componet2 from './Componet2'
+import { MainContext } from './Context'
 
-const Component1 = ({text}) => {
+const Component1 = () => {
+
+  const {message} = useContext(MainContext)
+
   return (
-    <div style={{ width : "200px"}} className=' border ms-5'>
-        1
-        <p>{text}</p>
-        <Component2 text={text}/>
+    <div style={{ width : '200px'}} className=' ms-5 border'>
+        <h3>1</h3>
+        <p>{message}</p>
+        <Componet2/>
     </div>
   )
 }

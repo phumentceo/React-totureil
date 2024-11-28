@@ -25,7 +25,6 @@ import Object_state04 from './components/hook/object-state/Object_state04'
 import State05 from './components/hook/state/State05'
 import State06 from './components/hook/state/State06'
 import State07 from './components/hook/state/State07'
-import Show from './components/hook/context/test-context/Show'
 import Main from './components/hook/context/test-context/Main'
 const App = () => {
   return (

@@ -1,12 +1,15 @@
 import React from 'react'
-import Show from './Show'
+import Component1 from './Component1'
+import { MainContext } from './Context'
 
 const Main = () => {
   return (
     <div>
-        <Show text={"Hello Prop"}/>
+        <MainContext.Provider value={{ message : "Hello Context", color : 'red'}}>
+               <Component1/>
+        </MainContext.Provider>
     </div>
   )
 }
 
-export default Main;
+export default Main
